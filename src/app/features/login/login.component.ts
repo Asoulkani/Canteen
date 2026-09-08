@@ -23,7 +23,7 @@ export class LoginComponent {
   });
 
   onSubmit() {
-
+    this.errorMessage.set(null);
     if(this.loginForm.invalid || this.isSubmitting())
       return;
 
