@@ -50,7 +50,7 @@ export class AuthService {
     sessionStorage.removeItem(this.userSessionKey);
   }
 
-  putUserInSession(){
+  private putUserInSession(){
     const jsonUser = JSON.stringify(this.user());
     sessionStorage.setItem(this.userSessionKey, jsonUser);
   }
