@@ -1,1 +1,162 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-bg: #f6efe4;
+  --color-surface: #fffdf8;
+  --color-header: #2c241c;
+  --color-primary: #c45c26;
+  --color-primary-hover: #a84c1d;
+  --color-primary-disabled: #d9a88c;
+  --color-text: #2c241c;
+  --color-text-muted: #6b5e52;
+  --color-border: #e4d5c4;
+  --color-error: #b42318;
+  --color-error-bg: #fdecea;
+  --radius: 12px;
+  --shadow: 0 10px 30px rgba(44, 36, 28, 0.08);
+  --font: 'Source Sans 3', system-ui, sans-serif;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+input {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--color-text);
+  font: inherit;
+}
+
+input:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+  border-color: var(--color-primary);
+}
+
+input.ng-invalid.ng-touched {
+  border-color: var(--color-error);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.page {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+}
+
+.page--centered {
+  min-height: calc(100vh - 72px);
+  display: grid;
+  place-items: center;
+}
+
+.page-header {
+  margin-bottom: var(--space-6);
+}
+
+.page-header h1,
+.card-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.page-subtitle,
+.card-subtitle {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.card {
+  width: min(420px, 100%);
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.field-error,
+.form-error {
+  margin-top: var(--space-2);
+  color: var(--color-error);
+  font-size: 0.9rem;
+}
+
+.form-error {
+  padding: var(--space-3);
+  background: var(--color-error-bg);
+  border-radius: 8px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border: 0;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.btn-primary:disabled {
+  background: var(--color-primary-disabled);
+  cursor: not-allowed;
+}
+
+.placeholder {
+  color: var(--color-text-muted);
+}

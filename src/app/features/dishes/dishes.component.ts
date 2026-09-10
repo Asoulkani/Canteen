@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {DishesService} from '../../core/dishes.service';
 
 @Component({
   selector: 'app-dishes',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './dishes.component.scss'
 })
 export class DishesComponent {
-
+  protected dishesService = inject(DishesService);
 }

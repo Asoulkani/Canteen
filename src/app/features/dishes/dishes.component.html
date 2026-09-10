@@ -1,1 +1,9 @@
-<p>dishes works!</p>
+<section class="page">
+  <header class="page-header">
+    <h1>Today's menu</h1>
+    <p class="page-subtitle">Pick a dish to order</p>
+  </header>
+  @for (dish of dishesService.dishes(); track dish.name){
+    <p>{{ dish.name }} -- {{ dish.price }}</p>
+  }
+</section>
