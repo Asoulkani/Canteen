@@ -3,7 +3,32 @@
     <h1>Today's menu</h1>
     <p class="page-subtitle">Pick a dish to order</p>
   </header>
-  @for (dish of dishesService.dishes(); track dish.name){
-    <p>{{ dish.name }} -- {{ dish.price }}</p>
+
+  <form class="menu-toolbar" [formGroup]="formSearch" (submit)="$event.preventDefault()">
+    <div class="menu-search">
+      <label class="visually-hidden" for="searchQuery">Search dishes</label>
+      <input
+        type="search"
+        id="searchQuery"
+        formControlName="searchQuery"
+        placeholder="Search dishes…"
+        autocomplete="off"
+      />
+    </div>
+
+    <label class="veg-toggle" for="vegOnly">
+      <input type="checkbox" id="vegOnly" formControlName="vegOnly" />
+      Vegetarian only
+    </label>
+  </form>
+
+  @if (dishesService.filteredDishes().length === 0) {
+    <p class="menu-empty">No dishes match your search.</p>
+  } @else {
+    <div class="menu-grid">
+      @for (dish of dishesService.filteredDishes(); track dish.name) {
+        <app-dish-card [dish]="dish" />
+      }
+    </div>
   }
 </section>

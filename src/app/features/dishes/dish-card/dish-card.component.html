@@ -1,0 +1,11 @@
+<article class="dish-card">
+  <div class="dish-card__top">
+    <h2 class="dish-card__name">{{ dish().name }}</h2>
+    @if (dish().isVeg) {
+      <span class="badge badge--veg">Veg</span>
+    } @else {
+      <span class="badge badge--meat">Non-veg</span>
+    }
+  </div>
+  <p class="dish-card__price">{{ dish().price }}</p>
+</article>
