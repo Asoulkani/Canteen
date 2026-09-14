@@ -14,8 +14,6 @@ export class DishesService {
   readonly query = signal('');
   readonly vegOnly = signal(false);
 
-  constructor() { }
-
   readonly dishes = toSignal(
     this.http.get<Dishes[]>(`${environment.apiUrl}/dishes`), { initialValue: [] }
   );

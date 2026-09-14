@@ -5,6 +5,9 @@ import {UserResp} from './models/user-resp.model';
 import {environment} from '../environements/environement';
 import {AuthenticateReq} from './models/authenticate-req.model';
 import {tap} from 'rxjs';
+import {Dishes} from './models/dishes.model';
+import {Order} from './models/order.model';
+import {UserReq} from './models/user-req.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +56,31 @@ export class AuthService {
   private putUserInSession(){
     const jsonUser = JSON.stringify(this.user());
     sessionStorage.setItem(this.userSessionKey, jsonUser);
+  }
+
+  addOrder(dish: Dishes){
+    const user = this.authenticatedUser();
+    if (!user) return;
+    let isInOrders = false;
+    user.orders.forEach(order => {
+      if(order.dishes.name === dish.name) {
+        order.amount++;
+        isInOrders =true;
+        return;
+      }
+    });
+    if(!isInOrders)
+      user.orders.push({dishes: dish, amount: 1});
+
+    const body: UserReq ={name: user.name, email: user.email, orders: user.orders};
+    return this.http.post<UserResp>(`${environment.apiUrl}/updateUser`, body).pipe(
+      tap((value) => {
+        if (value.success) {
+          this.authenticatedUser.set(value.user);
+          this.putUserInSession();
+        }
+      })
+    );
   }
 
 }

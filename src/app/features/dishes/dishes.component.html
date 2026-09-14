@@ -3,21 +3,32 @@
     <h1>Today's menu</h1>
     <p class="page-subtitle">Pick a dish to order</p>
   </header>
-
-  <form class="menu-toolbar" [formGroup]="formSearch" (submit)="$event.preventDefault()">
+  @if (addToOrderError()){
+    <p class="form-error" role="alert">{{ addToOrderError() }}</p>
+  }
+  @if (addToOrderSucces()){
+    <p class="form-error" role="alert">{{ addToOrderSucces() }}</p>
+  }
+  <form class="menu-toolbar" (submit)="$event.preventDefault()">
     <div class="menu-search">
       <label class="visually-hidden" for="searchQuery">Search dishes</label>
       <input
         type="search"
         id="searchQuery"
-        formControlName="searchQuery"
         placeholder="Search dishes…"
         autocomplete="off"
+        [value]="dishesService.query()"
+        (input)="dishesService.query.set($any($event.target).value)"
       />
     </div>
 
     <label class="veg-toggle" for="vegOnly">
-      <input type="checkbox" id="vegOnly" formControlName="vegOnly" />
+      <input
+        type="checkbox"
+        id="vegOnly"
+        [checked]="dishesService.vegOnly()"
+        (input)="dishesService.vegOnly.set($any($event.target).checked)"
+      />
       Vegetarian only
     </label>
   </form>
@@ -27,7 +38,9 @@
   } @else {
     <div class="menu-grid">
       @for (dish of dishesService.filteredDishes(); track dish.name) {
-        <app-dish-card [dish]="dish" />
+        <a [routerLink]="['/dishes', dish.name]">
+          <app-dish-card [dish]="dish" (add)="addDish(dish)" />
+        </a>
       }
     </div>
   }

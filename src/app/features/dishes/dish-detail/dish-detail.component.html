@@ -1,0 +1,6 @@
+@if (dish(); as d) {
+  <app-dish-card [dish]="d" />
+  <button type="button">Add to Order</button>
+} @else {
+  <p>Dish not found.</p>
+}

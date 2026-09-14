@@ -1,4 +1,4 @@
-import {Component, input} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {Dishes} from '../../../core/models/dishes.model';
 
 @Component({
@@ -9,4 +9,12 @@ import {Dishes} from '../../../core/models/dishes.model';
 })
 export class DishCardComponent {
   dish = input.required<Dishes>();
+
+  readonly add = output<void>();
+
+  onAdd(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.add.emit();
+  }
 }
