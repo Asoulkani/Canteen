@@ -121,16 +121,26 @@ button {
 }
 
 .field-error,
-.form-error {
+.form-error,
+.form-success {
   margin-top: var(--space-2);
-  color: var(--color-error);
   font-size: 0.9rem;
 }
 
-.form-error {
+.form-error,
+.form-success {
   padding: var(--space-3);
-  background: var(--color-error-bg);
   border-radius: 8px;
+}
+
+.form-error {
+  color: var(--color-error);
+  background: var(--color-error-bg);
+}
+
+.form-success {
+  color: #245c32;
+  background: #e8f4ea;
 }
 
 .btn {

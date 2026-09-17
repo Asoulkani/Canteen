@@ -1,20 +1,39 @@
-import {Component, computed, inject} from '@angular/core';
+import {Component, computed, inject, signal} from '@angular/core';
 import {Dishes} from '../../../core/models/dishes.model';
 import {DishCardComponent} from '../dish-card/dish-card.component';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {DishesService} from '../../../core/dishes.service';
+import {AuthService} from '../../../core/auth.service';
 
 @Component({
   selector: 'app-dish-detail',
   imports: [
-    DishCardComponent
+    DishCardComponent,
+    RouterLink
   ],
   templateUrl: './dish-detail.component.html',
   styleUrl: './dish-detail.component.scss'
 })
 export class DishDetailComponent{
   private route = inject(ActivatedRoute);
-  private dishService = inject(DishesService);
+  protected dishService = inject(DishesService);
+  protected authService = inject(AuthService);
+
+  protected addToOrderError = signal<string | null>(null);
+  protected addToOrderSuccess = signal<string | null>(null);
+
+  addDish(dish: Dishes) {
+    this.addToOrderError.set(null);
+    this.addToOrderSuccess.set(null);
+    this.authService.addOrder(dish).subscribe({
+      next: () => {
+        this.addToOrderSuccess.set('Added to your order');
+      },
+      error: () => {
+        this.addToOrderError.set('Could not add this dish');
+      }
+    });
+  }
 
   private name = decodeURIComponent(this.route.snapshot.paramMap.get('name') ?? '');
   readonly dish = computed(() =>

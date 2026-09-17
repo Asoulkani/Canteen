@@ -7,6 +7,17 @@
       <span class="badge badge--meat">Non-veg</span>
     }
   </div>
-  <p class="dish-card__price">{{ dish().price }}</p>
-  <button type="button" (click)="onAdd($event)">+</button>
+  <div class="dish-card__footer">
+    <p class="dish-card__price">{{ dish().price }}</p>
+    @if (showAdd()) {
+      <button
+        type="button"
+        class="dish-card__add"
+        (click)="onAdd($event)"
+        aria-label="Add to order"
+      >
+        +
+      </button>
+    }
+  </div>
 </article>

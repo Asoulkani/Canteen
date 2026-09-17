@@ -17,17 +17,18 @@ import {AuthService} from '../../core/auth.service';
 export class DishesComponent {
   protected authService = inject(AuthService);
   protected dishesService = inject(DishesService);
-
   protected addToOrderError = signal<string | null>(null);
-  protected addToOrderSucces = signal<string | null>(null);
+  protected addToOrderSuccess = signal<string | null>(null);
 
-  addDish(dish: Dishes){
-    this.authService.addOrder(dish)?.subscribe({
-      next: dish => {
-        this.addToOrderSucces.set("Order added");
+  addDish(dish: Dishes) {
+    this.addToOrderError.set(null);
+    this.addToOrderSuccess.set(null);
+    this.authService.addOrder(dish).subscribe({
+      next: () => {
+        this.addToOrderSuccess.set('Added to your order');
       },
-      error: err =>{
-        this.addToOrderError.set("Order was not added");
+      error: () => {
+        this.addToOrderError.set('Could not add this dish');
       }
     });
   }

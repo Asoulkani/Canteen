@@ -1,0 +1,25 @@
+<section class="page">
+  <header class="page-header">
+    <h1>Your orders</h1>
+    <p class="page-subtitle">Dishes you have added from the menu</p>
+  </header>
+
+  @if (orders().length === 0) {
+    <p class="orders-empty">
+      No orders yet.
+      <a routerLink="/dishes">Browse the menu</a>
+    </p>
+  } @else {
+    <ul class="order-list">
+      @for (order of orders(); track order.dishes.name) {
+        <li class="order-row">
+          <div>
+            <h2>{{ order.dishes.name }}</h2>
+            <p>{{ order.dishes.price }}</p>
+          </div>
+          <span class="order-qty">×{{ order.amount }}</span>
+        </li>
+      }
+    </ul>
+  }
+</section>

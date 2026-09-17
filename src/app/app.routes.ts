@@ -5,9 +5,12 @@ import {authGuard} from './core/auth.guard';
 import {loggedGuard} from './core/logged.guard';
 import {DishDetailComponent} from './features/dishes/dish-detail/dish-detail.component';
 
+import { OrdersComponent } from './features/orders/orders.component';
+
 export const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [loggedGuard]},
   {path: 'dishes', component: DishesComponent, canActivate :[authGuard]},
   { path: 'dishes/:name', component: DishDetailComponent, canActivate: [authGuard] },
+  { path: 'orders', component: OrdersComponent, canActivate: [authGuard] },
   {path: '', redirectTo: 'dishes', pathMatch: 'full'},
 ];

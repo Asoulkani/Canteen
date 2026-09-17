@@ -1,6 +1,29 @@
-@if (dish(); as d) {
-  <app-dish-card [dish]="d" />
-  <button type="button">Add to Order</button>
-} @else {
-  <p>Dish not found.</p>
-}
+<section class="page">
+  <a class="back-link" routerLink="/dishes">← Menu</a>
+
+  @if (dish(); as d) {
+    <div class="detail">
+      <app-dish-card [dish]="d" [showAdd]="false" />
+
+      <div class="detail__panel">
+        <h1>{{ d.name }}</h1>
+        <p class="page-subtitle">{{ d.price }} · {{ d.isVeg ? 'Vegetarian' : 'Non-vegetarian' }}</p>
+
+        @if (addToOrderError()) {
+          <p class="form-error" role="alert">{{ addToOrderError() }}</p>
+        }
+        @if (addToOrderSuccess()) {
+          <p class="form-success">{{ addToOrderSuccess() }}</p>
+        }
+
+        <button class="btn btn-primary" type="button" (click)="addDish(d)">
+          Add to order
+        </button>
+      </div>
+    </div>
+  } @else if (dishService.dishes().length === 0) {
+    <p class="menu-empty">Loading dish…</p>
+  } @else {
+    <p class="menu-empty">Dish not found.</p>
+  }
+</section>

@@ -1,6 +1,12 @@
 <div class="layout">
   <header class="app-header">
     <a class="brand" routerLink="/">Canteen</a>
+    @if (authService.isAuthenticated()) {
+      <nav class="app-nav">
+        <a routerLink="/dishes" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Menu</a>
+        <a routerLink="/orders" routerLinkActive="is-active">Orders</a>
+      </nav>
+    }
   </header>
   <main class="app-main">
     <router-outlet />

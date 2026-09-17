@@ -9,6 +9,7 @@ import {Dishes} from '../../../core/models/dishes.model';
 })
 export class DishCardComponent {
   dish = input.required<Dishes>();
+  showAdd = input(true);
 
   readonly add = output<void>();
 

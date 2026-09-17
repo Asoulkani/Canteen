@@ -3,11 +3,11 @@
     <h1>Today's menu</h1>
     <p class="page-subtitle">Pick a dish to order</p>
   </header>
-  @if (addToOrderError()){
+  @if (addToOrderError()) {
     <p class="form-error" role="alert">{{ addToOrderError() }}</p>
   }
-  @if (addToOrderSucces()){
-    <p class="form-error" role="alert">{{ addToOrderSucces() }}</p>
+  @if (addToOrderSuccess()) {
+    <p class="form-success">{{ addToOrderSuccess() }}</p>
   }
   <form class="menu-toolbar" (submit)="$event.preventDefault()">
     <div class="menu-search">
